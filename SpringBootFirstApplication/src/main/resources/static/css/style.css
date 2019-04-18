@@ -1,0 +1,19 @@
+@charset "UTF-8";
+html,body{
+	font-family: sans-serif;
+}
+.btn-sanpham{
+	text-decoration: none;
+	color: white;
+}
+a:hover {
+	text-decoration: none;
+	color: white;
+}
+label.error {
+    display: inline-block;
+    color:red;
+}
+.btn-themsp{
+	margin-right: 20px;
+}
