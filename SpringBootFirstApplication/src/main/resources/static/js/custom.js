@@ -70,45 +70,73 @@ $(document).ready(function() {
 			}
 		}
 	});
-//	$("#formTimKiemSp").validate({
-//		rules : {
-//			giaBatDau : {
-//				digits : true,
-//				minStrict : 0
-//			},
-//			giaKetThuc : {
-//				digits : true,
-//				minStrict : 0
-//			},
-//			soLuongBatDau : {
-//				digits : true,
-//				minStrict : 0
-//			},
-//			soLuongKetThuc : {
-//				digits : true,
-//				minStrict : 0
-//			}
-//		},
-//		messages : {
-//			giaBatDau : {
-//				digits : "Số giá tiền bạn nhập không hợp lệ",
-//				minStrict : "Số giá tiền bạn nhập không hợp lệ"
-//			},
-//			giaKetThuc : {
-//				digits : "Số giá tiền bạn nhập không hợp lệ",
-//				minStrict : "Số giá tiền bạn nhập không hợp lệ"
-//			},
-//			soLuongBatDau : {
-//				digits : "Số lượng bạn nhập không hợp lệ, vui lòng thử lại",
-//				minStrict : "Số lượng bạn nhập không hợp lệ, vui lòng thử lại"
-//			},
-//			soLuongKetThuc : {
-//				digits : "Số lượng bạn nhập không hợp lệ, vui lòng thử lại",
-//				minStrict : "Số lượng bạn nhập không hợp lệ, vui lòng thử lại"
-//			},
-//		}
-//		
-//	});
+	$("#formTimSpTheoTen").validate({
+		rules : {
+			tensanpham : {
+				required : true
+			}
+		},
+		messages : {
+			tensanpham : {
+				required : "Vui lòng nhập từ khóa sản phẩm bạn cần tìm"
+			}
+		}
+		
+	});
+	$("#formTimSpTheoKhoangGia").validate({
+		rules : {
+			khoanggiabatdau : {
+				required : true,
+				digits : true,
+				minStrict : 0
+			},
+			khoanggiaketthuc : {
+				required : true,
+				digits : true,
+				minStrict : 0
+			}
+		},
+		messages : {
+			khoanggiabatdau : {
+				required : "Vui lòng nhập khoảng giá bắt đầu",
+				digits : "Số giá tiền bạn nhập không hợp lệ",
+				minStrict : "Số giá tiền bạn nhập không hợp lệ"
+			},
+			khoanggiaketthuc : {
+				required : "Vui lòng nhập khoảng giá kết thúc",
+				digits : "Số giá tiền bạn nhập không hợp lệ",
+				minStrict : "Số giá tiền bạn nhập không hợp lệ"
+			},
+		}
+		
+	});
+	$("#formTimSpTheoSoLuong").validate({
+		rules : {
+			soluongbatdau : {
+				required : true,
+				digits : true,
+				minStrict : 0
+			},
+			soluongketthuc : {
+				required : true,
+				digits : true,
+				minStrict : 0
+			}
+		},
+		messages : {
+			soluongbatdau : {
+				required : "Vui lòng nhập khoảng số lượng bắt đầu",
+				digits : "Số lượng bạn nhập không hợp lệ, vui lòng thử lại",
+				minStrict : "Số lượng bạn nhập không hợp lệ, vui lòng thử lại"
+			},
+			soluongketthuc : {
+				required : "Vui lòng nhập khoảng số lượng kết thúc",
+				digits : "Số lượng bạn nhập không hợp lệ, vui lòng thử lại",
+				minStrict : "Số lượng bạn nhập không hợp lệ, vui lòng thử lại"
+			},
+		}
+		
+	});
 	function formatCurrency()
 	{
 		$("td.giatien").each(function(key,value){

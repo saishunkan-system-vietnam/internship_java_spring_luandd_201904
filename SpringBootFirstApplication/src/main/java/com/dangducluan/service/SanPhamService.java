@@ -52,15 +52,14 @@ public class SanPhamService implements SanPhamImp{
 	}
 
 	@Override
-	public List<SanPham> layDanhSachSanPhamTheoGia(int giaBD, int giaKT) {
+	public List<SanPham> layDanhSachSanPhamTheoKhoangGia(int giaSanPhamBd, int giaSanPhamKt) {
 		// TODO Auto-generated method stub
-		return sanPhamDAO.layDanhSachSanPhamTheoGia(giaBD, giaKT);
+		return sanPhamDAO.layDanhSachSanPhamTheoKhoangGia(giaSanPhamBd,giaSanPhamKt);
 	}
 
 	@Override
-	public List<SanPham> layDanhSachSanPhamTheoSoLuong(int soLuongBD, int soLuongKT) {
+	public List<SanPham> layDanhSachSanPhamTheoKhoangSoLuong(int soLuongBatDau, int soLuongKetThuc) {
 		// TODO Auto-generated method stub
-		return sanPhamDAO.layDanhSachSanPhamTheoSoLuong(soLuongBD, soLuongKT);
+		return sanPhamDAO.layDanhSachSanPhamTheoKhoangSoLuong(soLuongBatDau, soLuongKetThuc);
 	}
-
 }

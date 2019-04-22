@@ -1,0 +1,64 @@
+<div class="row" style="margin-bottom: 20px;">
+	<div class="btn-themsp">
+		<button type="button" class="btn btn-primary">
+			<a th:href="@{/sanpham/themsp}" class="btn-sanpham">Thêm</a>
+		</button>
+	</div>
+	<div style="width: 800px;">
+		<form th:action="@{/sanpham/timsptheoten}" method="POST"
+			id="formTimSpTheoTen">
+			<div class="row">
+				<div class="col-md-10 col-sm-10">
+					<input type="text" class="form-control"
+						placeholder="Nhập tên sản phẩm bạn muốn tìm" name="tensanpham">
+				</div>
+				<div class="col-md-2 col-sm-2">
+					<button type="submit" class="btn btn-info">Tìm kiếm theo
+						tên</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div style="width: 800px; margin-top: 20px; margin-left: 85px">
+		<form th:action="@{/sanpham/timsptheokhoanggia}" method="POST"
+			id="formTimSpTheoKhoangGia">
+			<div class="row">
+				<div class="col-md-12 col-sm-12 timkiemtheokhoang">
+					<label>Khoảng bắt đầu :</label><br> <input type="text"
+						class="form-control" placeholder="Nhập khoảng giá bắt đầu"
+						name="khoanggiabatdau">
+				</div>
+				<div class="col-md-12 col-sm-12 timkiemtheokhoang">
+					<label>Khoảng kết thúc :</label><br> <input type="text"
+						class="form-control" placeholder="Nhập khoảng giá kết thúc"
+						name="khoanggiaketthuc">
+				</div>
+				<div class="col-md-2 col-sm-2 timkiemtheokhoang">
+					<button type="submit" class="btn btn-info">Tìm kiếm
+						khoảng giá</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div style="width: 800px; margin-top: 20px; margin-left: 85px">
+		<form th:action="@{/sanpham/timsptheosoluong}" method="POST"
+			id="formTimSpTheoSoLuong">
+			<div class="row">
+				<div class="col-md-12 col-sm-12 timkiemtheokhoang">
+					<label>Khoảng bắt đầu :</label><br> <input type="text"
+						class="form-control" placeholder="Nhập khoảng số lượng bắt đầu"
+						name="soluongbatdau">
+				</div>
+				<div class="col-md-12 col-sm-12 timkiemtheokhoang">
+					<label>Khoảng kết thúc :</label><br> <input type="text"
+						class="form-control" placeholder="Nhập khoảng số lượng kết thúc"
+						name="soluongketthuc">
+				</div>
+				<div class="col-md-2 col-sm-2 timkiemtheokhoang">
+					<button type="submit" class="btn btn-info">Tìm kiếm
+						số lượng</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

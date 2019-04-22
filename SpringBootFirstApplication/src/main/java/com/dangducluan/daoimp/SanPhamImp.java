@@ -9,6 +9,6 @@ public interface SanPhamImp {
 	public abstract boolean suaThongTinSanPhamTheoMa(SanPham sanPham);
 	public abstract boolean xoaSanPhamTheoMa(SanPham sanPham);
 	public abstract List<SanPham> layDanhSachSanPhamTheoTen(String tenSanPham);
-	public abstract List<SanPham> layDanhSachSanPhamTheoGia(int giaBD, int giaKT);
-	public abstract List<SanPham> layDanhSachSanPhamTheoSoLuong(int soLuongBD, int soLuongKT);
+	public abstract List<SanPham> layDanhSachSanPhamTheoKhoangGia(int giaSanPhamBd, int giaSanPhamKt);
+	public abstract List<SanPham> layDanhSachSanPhamTheoKhoangSoLuong(int soLuongBatDau, int soLuongKetThuc);
 }

@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.dialect.SAPDBDialect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.HttpClientErrorException.Gone;
 
 import com.dangducluan.daoimp.SanPhamImp;
 import com.dangducluan.entities.SanPham;
@@ -99,42 +99,42 @@ public class SanPhamDAO implements SanPhamImp{
 	@Transactional
 	@Override
 	/**
-	 * Search list product with condition name product
+	 * Search list data product with condition name
 	 * Param : String tenSanPham
-	 * Return List<SanPham>
+	 * Return : List<SanPham>
 	 */
 	public List<SanPham> layDanhSachSanPhamTheoTen(String tenSanPham) {
 		// TODO Auto-generated method stub
+		Session sesion = sessionFactory.getCurrentSession();
+		String query = "from sanpham where tensanpham LIKE '%"+tenSanPham.trim()+"%'";
+		List<SanPham> dsSanPhamTheoTen = sesion.createQuery(query).getResultList();
+		return dsSanPhamTheoTen;
+	}
+	@Transactional
+	@Override
+	/**
+	 * Search list data product with condition price
+	 * Param : int giaSanPhamBd, int giaSanPhamKt
+	 * Return : List<SanPham>
+	 */
+	public List<SanPham> layDanhSachSanPhamTheoKhoangGia(int giaSanPhamBd, int giaSanPhamKt) {
+		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
-		String query = "from sanpham where tensanpham LIKE '%"+tenSanPham+"%'";
+		String query = "from sanpham where giatien between "+giaSanPhamBd+" and "+giaSanPhamKt;
 		List<SanPham> dsSanPham = session.createQuery(query).getResultList();
 		return dsSanPham;
 	}
 	@Transactional
 	@Override
 	/**
-	 * Search list product with condition price product
-	 * Param : int giaBD, int giaKT
-	 * Return List<SanPham>
+	 * Search list data product with condition amount
+	 * Param : int soLuongBatDau, int soLuongKetThuc
+	 * Return : List<SanPham>
 	 */
-	public List<SanPham> layDanhSachSanPhamTheoGia(int giaBD, int giaKT) {
+	public List<SanPham> layDanhSachSanPhamTheoKhoangSoLuong(int soLuongBatDau, int soLuongKetThuc) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
-		String query = "from sanpham where giatien between "+giaBD+" and "+giaKT;
-		List<SanPham> dsSanPham = session.createQuery(query).getResultList();
-		return dsSanPham;
-	}
-	@Transactional
-	@Override
-	/**
-	 * Search list product with condition amount product
-	 * Param : int soLuongBD, int soLuongKT
-	 * Return List<SanPham>
-	 */
-	public List<SanPham> layDanhSachSanPhamTheoSoLuong(int soLuongBD, int soLuongKT) {
-		// TODO Auto-generated method stub
-		Session session = sessionFactory.getCurrentSession();
-		String query = "from sanpham where soluong between "+soLuongBD+" and "+soLuongKT;
+		String query = "from sanpham where soluong between "+soLuongBatDau+" and "+soLuongKetThuc;
 		List<SanPham> dsSanPham = session.createQuery(query).getResultList();
 		return dsSanPham;
 	}

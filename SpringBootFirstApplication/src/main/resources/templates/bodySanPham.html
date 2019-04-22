@@ -1,0 +1,31 @@
+<div class="row">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Mã sản phẩm</th>
+				<th>Tên sản phẩm</th>
+				<th>Số lượng</th>
+				<th>Giá tiền</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="sp : ${dsSanPham}">
+				<td th:utext="${sp.masanpham}"></td>
+				<td th:utext="${sp.tensanpham}"></td>
+				<td th:utext="${sp.soluong}"></td>
+				<td class="giatien" th:utext="${sp.giatien}"></td>
+				<td>
+					<button type="button" class="btn btn-warning">
+						<a th:href="@{|/sanpham/suasp/${sp.masanpham}|}"
+							class="btn-sanpham">Sửa</a>
+					</button> &nbsp &nbsp
+					<button type="button" class="btn btn-danger btn-xoasanpham"
+						th:data-masanpham="${sp.masanpham}">
+						<a class="btn-sanpham">Xóa</a>
+					</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

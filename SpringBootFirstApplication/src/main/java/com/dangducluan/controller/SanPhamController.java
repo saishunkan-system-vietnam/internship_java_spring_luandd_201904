@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.dangducluan.entities.SanPham;
-import com.dangducluan.form.TimSanPham;
 import com.dangducluan.service.SanPhamService;
 
 @Controller
@@ -55,29 +56,25 @@ public class SanPhamController {
 		}
 		return "redirect:/sanpham/"+sanpham.getMasanpham();
 	}
-	@PostMapping(path = "/timsptheotieuchi")
-	public String timSanPhamTheoTieuChi(TimSanPham timSanPham,ModelMap modelMap)
+	@PostMapping(path = "/timsptheoten")
+	public String timSanPhamTheoTen(@RequestParam String tensanpham,ModelMap modelMap)
 	{
-		String tenSanPham = timSanPham.getTenSanPham();
-		int giaBD = timSanPham.getGiaBatDau();
-		int giaKT = timSanPham.getGiaKetThuc();
-		int soLuongBD = timSanPham.getSoLuongBatDau();
-		int soLuongKT = timSanPham.getSoLuongKetThuc();
-		System.out.println("so luong bd : "+soLuongBD);
-		System.out.println("so luong kt : "+soLuongKT);
-		List<SanPham> dsSanPham = null;
-		if(!tenSanPham.trim().isEmpty())
-		{
-			dsSanPham = sanPhamService.layDanhSachSanPhamTheoTen(tenSanPham);
-		}
-		if(giaBD != 0 && giaKT != 0) {
-			dsSanPham = sanPhamService.layDanhSachSanPhamTheoGia(giaBD, giaKT);
-		}
-		if(soLuongBD != 0 && soLuongKT != 0) {
-			dsSanPham = sanPhamService.layDanhSachSanPhamTheoSoLuong(soLuongBD, soLuongKT);
-		}
-		modelMap.addAttribute("dsSanPham",dsSanPham);
+		List<SanPham> dsSanPhamTheoTen = sanPhamService.layDanhSachSanPhamTheoTen(tensanpham);
+		modelMap.addAttribute("dsSanPham", dsSanPhamTheoTen);
 		return "dsSanPhamTimKiem";
 	}
-	
+	@PostMapping(path = "/timsptheokhoanggia")
+	public String timSanPhamTheoKhoangGia(@RequestParam int khoanggiabatdau,@RequestParam int khoanggiaketthuc, ModelMap modelMap)
+	{
+		List<SanPham> dsSanPhamTheoGia = sanPhamService.layDanhSachSanPhamTheoKhoangGia(khoanggiabatdau, khoanggiaketthuc);
+		modelMap.addAttribute("dsSanPham", dsSanPhamTheoGia);
+		return "dsSanPhamTimKiem";
+	}
+	@PostMapping(path = "/timsptheosoluong")
+	public String timSanPhamTheoSoLuong(@RequestParam int soluongbatdau, @RequestParam int soluongketthuc, ModelMap modelMap)
+	{
+		List<SanPham> dsSanPhamTheoSoLuong = sanPhamService.layDanhSachSanPhamTheoKhoangSoLuong(soluongbatdau,soluongketthuc);
+		modelMap.addAttribute("dsSanPham", dsSanPhamTheoSoLuong);
+		return "dsSanPhamTimKiem";
+	}
 }
