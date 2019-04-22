@@ -11,8 +11,8 @@ public class SanPham {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int masanpham;
 	private String tensanpham;
-	private String giatien;
 	private int soluong;
+	private int giatien;
 	public int getMasanpham() {
 		return masanpham;
 	}
@@ -25,17 +25,18 @@ public class SanPham {
 	public void setTensanpham(String tensanpham) {
 		this.tensanpham = tensanpham;
 	}
-	public String getGiatien() {
-		return giatien;
-	}
-	public void setGiatien(String giatien) {
-		this.giatien = giatien;
-	}
 	public int getSoluong() {
 		return soluong;
 	}
 	public void setSoluong(int soluong) {
 		this.soluong = soluong;
 	}
+	public int getGiatien() {
+		return giatien;
+	}
+	public void setGiatien(int giatien) {
+		this.giatien = giatien;
+	}
+	
 	
 }

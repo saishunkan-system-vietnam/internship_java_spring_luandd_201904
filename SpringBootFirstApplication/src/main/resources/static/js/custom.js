@@ -70,6 +70,45 @@ $(document).ready(function() {
 			}
 		}
 	});
+//	$("#formTimKiemSp").validate({
+//		rules : {
+//			giaBatDau : {
+//				digits : true,
+//				minStrict : 0
+//			},
+//			giaKetThuc : {
+//				digits : true,
+//				minStrict : 0
+//			},
+//			soLuongBatDau : {
+//				digits : true,
+//				minStrict : 0
+//			},
+//			soLuongKetThuc : {
+//				digits : true,
+//				minStrict : 0
+//			}
+//		},
+//		messages : {
+//			giaBatDau : {
+//				digits : "Số giá tiền bạn nhập không hợp lệ",
+//				minStrict : "Số giá tiền bạn nhập không hợp lệ"
+//			},
+//			giaKetThuc : {
+//				digits : "Số giá tiền bạn nhập không hợp lệ",
+//				minStrict : "Số giá tiền bạn nhập không hợp lệ"
+//			},
+//			soLuongBatDau : {
+//				digits : "Số lượng bạn nhập không hợp lệ, vui lòng thử lại",
+//				minStrict : "Số lượng bạn nhập không hợp lệ, vui lòng thử lại"
+//			},
+//			soLuongKetThuc : {
+//				digits : "Số lượng bạn nhập không hợp lệ, vui lòng thử lại",
+//				minStrict : "Số lượng bạn nhập không hợp lệ, vui lòng thử lại"
+//			},
+//		}
+//		
+//	});
 	function formatCurrency()
 	{
 		$("td.giatien").each(function(key,value){

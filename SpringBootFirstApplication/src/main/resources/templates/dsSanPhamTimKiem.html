@@ -3,10 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <!-- Include Header -->
-<th:block th:include="/header"></th:block>
-<title>Danh Sách Sản Phẩm</title>
+<th:block th:include="/_header"></th:block>
+<title>Danh Sách Sản Phẩm Tìm Kiếm</title>
 </head>
 <body>
-
+	<h2>Danh Sách Sản Phẩm Tìm Kiếm</h2>
+	<div class="container-fluid">
+		<!-- Start Header San Pham -->
+		<th:block th:include="/headerSanPham"></th:block>
+		<!-- /End Header San Pham -->
+		<!-- Start Body San Pham -->
+		<th:block th:include="/bodySanPham"></th:block>
+		<!-- End Body San Pham -->
+	</div>
 </body>
 </html>

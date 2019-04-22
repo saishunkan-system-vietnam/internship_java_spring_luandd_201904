@@ -9,57 +9,12 @@
 <body>
 	<h2>Danh Sách Sản Phẩm</h2>
 	<div class="container-fluid">
-		<div class="row" style="margin-bottom: 20px;">
-			<div class="btn-themsp">
-				<button type="button" class="btn btn-primary">
-					<a th:href="@{/sanpham/themsp}" class="btn-sanpham">Thêm</a>
-				</button>
-			</div>
-			<div style="width: 800px;">
-				<form th:action="@{/sanpham/timsptheoten}" method="POST">
-					<div class="row">
-						<div class="col-md-10 col-sm-10">
-							<input type="text" class="form-control"
-								placeholder="Nhập tên sản phẩm bạn muốm tìm" name="tensanpham">
-						</div>
-						<div class="col-md-2 col-sm-2">
-							<button type="submit" class="btn btn-info">Tìm kiếm</button>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-		<div class="row">
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th>Mã sản phẩm</th>
-						<th>Tên sản phẩm</th>
-						<th>Giá tiền</th>
-						<th>Số lượng</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="sp : ${dsSanPham}">
-						<td th:utext="${sp.masanpham}"></td>
-						<td th:utext="${sp.tensanpham}"></td>
-						<td class="giatien" th:utext="${sp.giatien}"></td>
-						<td th:utext="${sp.soluong}"></td>
-						<td>
-							<button type="button" class="btn btn-warning">
-								<a th:href="@{|/sanpham/suasp/${sp.masanpham}|}"
-									class="btn-sanpham">Sửa</a>
-							</button> &nbsp &nbsp
-							<button type="button" class="btn btn-danger btn-xoasanpham"
-								th:data-masanpham="${sp.masanpham}">
-								<a class="btn-sanpham">Xóa</a>
-							</button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+		<!-- Start Header San Pham -->
+		<th:block th:include="/headerSanPham"></th:block>
+		<!-- /End Header San Pham -->
+		<!-- Start Body San Pham -->
+		<th:block th:include="/bodySanPham"></th:block>
+		<!-- End Body San Pham -->
 	</div>
 </body>
 </html>

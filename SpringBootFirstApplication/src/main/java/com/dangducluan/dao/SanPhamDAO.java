@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.HttpClientErrorException.Gone;
 
 import com.dangducluan.daoimp.SanPhamImp;
 import com.dangducluan.entities.SanPham;
@@ -98,21 +99,44 @@ public class SanPhamDAO implements SanPhamImp{
 	@Transactional
 	@Override
 	/**
-	 * Search list data product using condition
+	 * Search list product with condition name product
 	 * Param : String tenSanPham
-	 * Return : List<SanPham>
+	 * Return List<SanPham>
 	 */
 	public List<SanPham> layDanhSachSanPhamTheoTen(String tenSanPham) {
 		// TODO Auto-generated method stub
-		Session sesion = sessionFactory.getCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
 		String query = "from sanpham where tensanpham LIKE '%"+tenSanPham+"%'";
-		List<SanPham> dsSanPhamTheoTen = sesion.createQuery(query).getResultList();
-		return dsSanPhamTheoTen;
+		List<SanPham> dsSanPham = session.createQuery(query).getResultList();
+		return dsSanPham;
 	}
+	@Transactional
 	@Override
-	public List<SanPham> layDanhSachSanPhamTheoKhoangGia(int giaSanPham) {
+	/**
+	 * Search list product with condition price product
+	 * Param : int giaBD, int giaKT
+	 * Return List<SanPham>
+	 */
+	public List<SanPham> layDanhSachSanPhamTheoGia(int giaBD, int giaKT) {
 		// TODO Auto-generated method stub
-		return null;
+		Session session = sessionFactory.getCurrentSession();
+		String query = "from sanpham where giatien between "+giaBD+" and "+giaKT;
+		List<SanPham> dsSanPham = session.createQuery(query).getResultList();
+		return dsSanPham;
+	}
+	@Transactional
+	@Override
+	/**
+	 * Search list product with condition amount product
+	 * Param : int soLuongBD, int soLuongKT
+	 * Return List<SanPham>
+	 */
+	public List<SanPham> layDanhSachSanPhamTheoSoLuong(int soLuongBD, int soLuongKT) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		String query = "from sanpham where soluong between "+soLuongBD+" and "+soLuongKT;
+		List<SanPham> dsSanPham = session.createQuery(query).getResultList();
+		return dsSanPham;
 	}
 
 }
