@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <typeAliases>
+  	<typeAlias type="com.dangducluan.entities.Blog" alias="Blog"/>
+  	<typeAlias type="com.dangducluan.entities.Post" alias="Post"/>
+  	<typeAlias type="com.dangducluan.entities.User" alias="User"/>
+  </typeAliases>
+  <mappers>
+    <mapper resource="com/dangducluan/mappersql/BlogMapper.xml"/>
+    <mapper resource="com/dangducluan/mappersql/PostMapper.xml"/>
+    <mapper resource="com/dangducluan/mappersql/UserMapper.xml"/>
+  </mappers>
+</configuration>

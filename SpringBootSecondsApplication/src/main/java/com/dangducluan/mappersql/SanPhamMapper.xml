@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dangducluan.mapper.SanPhamMapper">
+	<select id="layTatCaSanPham" resultMap="SanPhamResult">
+		SELECT sp.masanpham
+		,sp.tensanpham
+		,sp.mota
+		,sp.hinhsanpham
+		,dmsp.madanhmuc
+		,dmsp.tendanhmuc
+		FROM sanpham sp
+		INNER JOIN danhmucsanpham dmsp ON sp.madanhmuc = dmsp.madanhmuc
+	</select>
+	<resultMap type="SanPham" id="SanPhamResult">
+		<id property="masanpham" column="masanpham" />
+		<result property="tensanpham" column="tensanpham" />
+		<result property="mota" column="mota" />
+		<result property="hinhsanpham" column="hinhsanpham" />
+		<association property="danhmucsanpham"
+			resultMap="DanhMucSanPhamResult"></association>
+		<collection property="dsChiTietSanPham"
+			ofType="ChiTietSanPham" resultMap="ChiTietSanPhamResult"></collection>
+	</resultMap>
+
+	<resultMap type="DanhMucSanPham" id="DanhMucSanPhamResult">
+		<id property="madanhmuc" column="madanhmuc" />
+		<id property="tendanhmuc" column="tendanhmuc" />
+	</resultMap>
+
+	<resultMap type="ChiTietSanPham" id="ChiTietSanPhamResult">
+		<association property="sizeSanPham"
+			resultMap="SizeSanPhamResult"></association>
+		<association property="mauSanPham"
+			resultMap="MauSanPhamResult"></association>
+	</resultMap>
+
+	<resultMap type="SizeSanPham" id="SizeSanPhamResult">
+		<id property="masize" column="masize" />
+		<result property="size" column="size" />
+	</resultMap>
+
+	<resultMap type="MauSanPham" id="MauSanPhamResult">
+		<id property="mamau" column="mamau" />
+		<result property="tenmau" column="tenmau" />
+	</resultMap>
+	<select id="layThongTinSanPhamTheoMa" parameterType="int"
+		resultMap="SanPhamResult">
+		SELECT sp.masanpham
+		,sp.tensanpham
+		,sp.mota
+		,sp.hinhsanpham
+		,sp.madanhmuc
+		,ctsp.masize
+		,ctsp.mamau
+		,dmsp.tendanhmuc
+		,msp.tenmau
+		,ssp.size
+		FROM sanpham sp
+		INNER JOIN chitietsanpham ctsp ON sp.masanpham =
+		ctsp.masanpham
+		INNER JOIN danhmucsanpham dmsp ON dmsp.madanhmuc =
+		sp.madanhmuc
+		INNER JOIN sizesanpham ssp ON ssp.masize = ctsp.masize
+		INNER JOIN mausanpham msp ON msp.mamau = ctsp.mamau
+		WHERE sp.masanpham
+		= #{masanpham}
+	</select>
+
+</mapper>

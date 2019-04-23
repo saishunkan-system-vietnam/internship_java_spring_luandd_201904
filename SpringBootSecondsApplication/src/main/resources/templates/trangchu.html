@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Trang chủ</title>
+<!-- Include Header -->
+<th:block th:include="/_header"></th:block>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<button type="button" class="btn btn-primary" data-toggle="modal"
+				data-target="#myModal">Thêm</button>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Mã sản phẩm</th>
+						<th>Tên sản phẩm</th>
+						<th>Mô tả</th>
+						<th>Hình sản phẩm</th>
+						<th>Tên danh mục</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="sp : ${dsSanPham}">
+						<td th:utext="${sp.masanpham}"></td>
+						<td th:utext="${sp.tensanpham}"></td>
+						<td th:utext="${sp.mota}"></td>
+						<td><img alt=""
+							th:src="@{|/image/sanpham/${sp.hinhsanpham}|}" width="250"
+							height="250"></td>
+						<td th:utext="${sp.danhmucsanpham.tendanhmuc}"></td>
+						<td>
+							<button type="button" class="btn btn-warning">Sửa</button> <br>
+							<br>
+							<button type="button" class="btn btn-danger">Xóa</button> <br>
+							<br>
+							<button type="button" class="btn btn btn-info">
+								<a th:href="@{|/sanpham/chitietsanpham/${sp.masanpham}|}">Chi
+									tiết</a>
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!-- Modal -->
+	<div id="myModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<form action="" method="POST">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Thêm sản phẩm</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="tensp">Tên sản phẩm :</label> <input type="text"
+								class="form-control">
+						</div>
+						<div class="form-group">
+							<label for="mota">Mô tả :</label>
+							<textarea class="form-control" rows="5"></textarea>
+						</div>
+						<div class="form-group">
+							<label for="hinhsp">Hình sản phẩm :</label> <input type="file"
+								class="form-control">
+						</div>
+						<div class="form-group">
+							<label for="sel1">Danh Mục :</label> <select class="form-control"
+								id="sel1">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="sel1">Mã màu :</label> <select class="form-control"
+								id="sel1">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="sel1">Mã Size :</label> <select class="form-control"
+								id="sel1">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+							</select>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Thêm
+							sản phẩm</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

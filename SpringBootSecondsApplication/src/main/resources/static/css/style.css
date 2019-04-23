@@ -1,0 +1,12 @@
+@charset "UTF-8";
+body {
+	font-family: sans-serif;
+}
+a {
+	text-decoration: none;
+	color: white;
+}
+a:hover {
+	text-decoration: none;
+	color: white;
+}
