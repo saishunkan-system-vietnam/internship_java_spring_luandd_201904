@@ -11,9 +11,20 @@
 		<h1>Chi tiết sản phẩm</h1>
 		<div class="row">
 			<div class="col-md-7 col-sm-7">
-				<h3 th:utext="${sanPham.tensanpham}"></h3>
-				<div>
-					<img alt="" th:src="@{|/image/sanpham/${sanPham.hinhsanpham}|}" width="400" height="400">
+				<div class="row">
+					<div class="col-md-8 col-sm-8">
+						<h3 th:utext="${sanPham.tensanpham}"></h3>
+						<div>
+							<img alt="" th:src="@{|/image/sanpham/${sanPham.hinhsanpham}|}"
+								width="400" height="400">
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-4">
+						<h4>Mô tả</h4>
+						<div>
+							<span th:utext="${sanPham.mota}"></span>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="col-md-5 col-sm-5">

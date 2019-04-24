@@ -12,5 +12,9 @@
   </typeAliases>
   <mappers>
     <mapper resource="com/dangducluan/mappersql/SanPhamMapper.xml"/>
+    <mapper resource="com/dangducluan/mappersql/DanhMucSanPhamMapper.xml"/>
+    <mapper resource="com/dangducluan/mappersql/MauSanPhamMapper.xml"/>
+    <mapper resource="com/dangducluan/mappersql/SizeSanPhamMapper.xml"/>
+    <mapper resource="com/dangducluan/mappersql/ChiTietSanPhamMapper.xml"/>
   </mappers>
 </configuration>

@@ -35,6 +35,23 @@ public class SanPhamDAO implements SanPhamImp{
 		SanPham sanPham = sanPhamMapper.layThongTinSanPhamTheoMa(maSanPham);
 		return sanPham;
 	}
+	@Override
+	public int themSanPham(SanPham sanPham) {
+		// TODO Auto-generated method stub
+		int maSanPham = sanPhamMapper.themSanPham(sanPham);
+		return maSanPham;
+	}
+	@Override
+	public boolean xoaSanPhamTheoMa(int maSanPham) {
+		// TODO Auto-generated method stub
+		try {
+			sanPhamMapper.xoaSanPhamTheoMa(maSanPham);
+			return true;
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return false;
+	}
 	
 
 }

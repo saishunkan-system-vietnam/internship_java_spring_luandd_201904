@@ -5,4 +5,6 @@ import com.dangducluan.entities.*;
 public interface SanPhamImp {
 	public abstract List<SanPham> layTatCaSanPham();
 	public abstract SanPham layThongTinSanPhamTheoMa(int maSanPham);
+	public abstract int themSanPham(SanPham sanPham);
+	public abstract boolean xoaSanPhamTheoMa(int maSanPham);
 }

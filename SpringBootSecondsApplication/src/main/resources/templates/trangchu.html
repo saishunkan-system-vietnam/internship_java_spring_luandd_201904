@@ -16,9 +16,7 @@
 					<tr>
 						<th>Mã sản phẩm</th>
 						<th>Tên sản phẩm</th>
-						<th>Mô tả</th>
 						<th>Hình sản phẩm</th>
-						<th>Tên danh mục</th>
 						<th></th>
 					</tr>
 				</thead>
@@ -26,19 +24,14 @@
 					<tr th:each="sp : ${dsSanPham}">
 						<td th:utext="${sp.masanpham}"></td>
 						<td th:utext="${sp.tensanpham}"></td>
-						<td th:utext="${sp.mota}"></td>
 						<td><img alt=""
 							th:src="@{|/image/sanpham/${sp.hinhsanpham}|}" width="250"
 							height="250"></td>
-						<td th:utext="${sp.danhmucsanpham.tendanhmuc}"></td>
 						<td>
-							<button type="button" class="btn btn-warning">Sửa</button> <br>
-							<br>
-							<button type="button" class="btn btn-danger">Xóa</button> <br>
-							<br>
+							<button type="button" class="btn btn-warning btn-suasanpham" th:data-masp="${sp.masanpham}">Sửa</button>
+							<button type="button" class="btn btn-danger btn-xoasanpham" th:data-masp="${sp.masanpham}">Xóa</button>
 							<button type="button" class="btn btn btn-info">
-								<a th:href="@{|/sanpham/chitietsanpham/${sp.masanpham}|}">Chi
-									tiết</a>
+								<a th:href="@{|/sanpham/chitietsanpham/${sp.masanpham}|}">Chi tiết</a>
 							</button>
 						</td>
 					</tr>
@@ -49,7 +42,6 @@
 	<!-- Modal -->
 	<div id="myModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
-			<form action="" method="POST">
 				<!-- Modal content-->
 				<div class="modal-content">
 					<div class="modal-header">
@@ -57,53 +49,73 @@
 						<h4 class="modal-title">Thêm sản phẩm</h4>
 					</div>
 					<div class="modal-body">
-						<div class="form-group">
-							<label for="tensp">Tên sản phẩm :</label> <input type="text"
-								class="form-control">
+						<form method="POST" id="formsanpham">
+							<div class="form-group">
+								<label for="tensanpham">Tên sản phẩm :</label> <input type="text" name="tensanpham"
+									class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="mota">Mô tả :</label>
+								<textarea class="form-control" rows="5" name="mota"></textarea>
+							</div>
+							<div class="form-group">
+								<label for="hinhsanpham">Hình sản phẩm :</label> <input type="file" name="hinhsanpham"
+									class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="sel1">Danh Mục :</label> <select class="form-control"
+									id="danhmuc">
+									<option th:each="danhmuc : ${dsDanhMuc}"
+										th:value="${danhmuc.madanhmuc}"
+										th:utext="${danhmuc.tendanhmuc}"></option>
+								</select>
+							</div>
+						</form>
+						<div id="container-chitietsanpham">
+							<div class="themchitietsanpham">
+								<div class="form-group">
+									<label for="sel1">Mã màu :</label> <select class="form-control"
+										id="mamau" name="mamau">
+										<option th:each="mausp : ${dsMau}" th:value="${mausp.mamau}"
+											th:utext="${mausp.tenmau}"></option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="sel1">Mã Size :</label> <select
+										class="form-control" id="masize" name="masize">
+										<option th:each="sizesp : ${dsSize}"
+											th:value="${sizesp.masize}" th:utext="${sizesp.size}"></option>
+									</select>
+								</div>
+								<button type="button" class="btn btn-success btn-themchitiet">Thêm</button>
+							</div>
+
 						</div>
-						<div class="form-group">
-							<label for="mota">Mô tả :</label>
-							<textarea class="form-control" rows="5"></textarea>
-						</div>
-						<div class="form-group">
-							<label for="hinhsp">Hình sản phẩm :</label> <input type="file"
-								class="form-control">
-						</div>
-						<div class="form-group">
-							<label for="sel1">Danh Mục :</label> <select class="form-control"
-								id="sel1">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="sel1">Mã màu :</label> <select class="form-control"
-								id="sel1">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="sel1">Mã Size :</label> <select class="form-control"
-								id="sel1">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-							</select>
+						<div class="themchitietsanpham" id="chitietsanpham">
+							<div class="form-group">
+								<label for="sel1">Mã màu :</label> <select class="form-control"
+									id="mamau" name="mamau">
+									<option th:each="mausp : ${dsMau}" th:value="${mausp.mamau}"
+										th:utext="${mausp.tenmau}"></option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="sel1">Mã Size :</label> <select class="form-control"
+									id="masize" name="masize">
+									<option th:each="sizesp : ${dsSize}"
+										th:value="${sizesp.masize}" th:utext="${sizesp.size}"></option>
+								</select>
+							</div>
+							<button type="button" class="btn btn-success btn-themchitiet">Thêm</button>
+							<button type="button" class="btn btn-danger btn-xoachitiet">Xóa</button>
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" data-dismiss="modal">Thêm
+						<button type="button" class="btn btn-primary btn-themsanpham" data-dismiss="modal">Thêm
 							sản phẩm</button>
 						<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
 					</div>
 				</div>
-			</form>
 		</div>
 	</div>
 </body>

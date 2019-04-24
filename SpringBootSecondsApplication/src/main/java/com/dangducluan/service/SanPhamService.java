@@ -25,4 +25,16 @@ public class SanPhamService implements SanPhamImp{
 		// TODO Auto-generated method stub
 		return sanPhamDAO.layThongTinSanPhamTheoMa(maSanPham);
 	}
+
+	@Override
+	public int themSanPham(SanPham sanPham) {
+		// TODO Auto-generated method stub
+		return sanPhamDAO.themSanPham(sanPham);
+	}
+
+	@Override
+	public boolean xoaSanPhamTheoMa(int maSanPham) {
+		// TODO Auto-generated method stub
+		return sanPhamDAO.xoaSanPhamTheoMa(maSanPham);
+	}
 }

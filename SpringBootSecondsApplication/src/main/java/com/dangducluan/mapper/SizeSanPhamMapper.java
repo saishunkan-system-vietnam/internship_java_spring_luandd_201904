@@ -1,5 +1,9 @@
 package com.dangducluan.mapper;
 
-public interface SizeSanPhamMapper {
+import java.util.List;
 
+import com.dangducluan.entities.SizeSanPham;
+
+public interface SizeSanPhamMapper {
+	public abstract List<SizeSanPham> layDanhSachSizeSanPham();
 }

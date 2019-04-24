@@ -1,6 +1,7 @@
 package com.dangducluan.entities;
 
 public class ChiTietSanPham {
+	private int maChiTietSanPham;
 	private SanPham sanPham;
 	private SizeSanPham sizeSanPham;
 	private MauSanPham mauSanPham;
@@ -22,6 +23,13 @@ public class ChiTietSanPham {
 	public void setMauSanPham(MauSanPham mauSanPham) {
 		this.mauSanPham = mauSanPham;
 	}
+	public int getMaChiTietSanPham() {
+		return maChiTietSanPham;
+	}
+	public void setMaChiTietSanPham(int maChiTietSanPham) {
+		this.maChiTietSanPham = maChiTietSanPham;
+	}
+	
 	
 	
 }
