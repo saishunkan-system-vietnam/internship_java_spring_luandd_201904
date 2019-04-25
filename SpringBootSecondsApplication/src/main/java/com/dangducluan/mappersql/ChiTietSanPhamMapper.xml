@@ -7,4 +7,7 @@
 	<delete id="xoaThongTinChiTietSanPham" parameterType="int">
 		delete from chitietsanpham where masanpham = #{maSanPham}
 	</delete>
+	<update id="capNhatThongTinChiTietSanPham" parameterType="ChiTietSanPham">
+		update chitietsanpham set mamau = #{mauSanPham.mamau}, masize = #{sizeSanPham.masize} where machitietsanpham = #{maChiTietSanPham}
+	</update>
 </mapper>

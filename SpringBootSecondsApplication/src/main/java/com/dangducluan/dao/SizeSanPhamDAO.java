@@ -14,6 +14,11 @@ public class SizeSanPhamDAO implements SizeSanPhamImp{
 	@Autowired
 	SizeSanPhamMapper sizeSanPhamMapper;
 	@Override
+	/**
+	 * Get list size product
+	 * @param : null
+	 * @return : List
+	 */
 	public List<SizeSanPham> layDanhSachSizeSanPham() {
 		// TODO Auto-generated method stub
 		List<SizeSanPham> dsSize = sizeSanPhamMapper.layDanhSachSizeSanPham();

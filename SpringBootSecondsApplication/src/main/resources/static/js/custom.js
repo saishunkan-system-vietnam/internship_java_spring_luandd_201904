@@ -21,44 +21,72 @@ $( document ).ready(function(){
 		}
 	});
 	$(".btn-themsanpham").click(function(){
-		var formSanPham = $("#formsanpham").serializeArray();
-		var dataSanPham = {};
-		var madanhmuc = $("select[id='danhmuc']").val();
-		var danhMucSanPham = {
-				madanhmuc : madanhmuc
-		};
-		$.each(formSanPham,function(key,data){
-			dataSanPham[data.name] = data.value;
-			
-		});
-		dataSanPham["danhmucsanpham"] = danhMucSanPham;
-		var arrayChiTietSanPham = [];
-		$("#container-chitietsanpham > .themchitietsanpham").each(function(key,data){
-			var objSizeSanPham = {};
-			var objMauSanPham = {};
-			var objChiTietSanPham = {}
-			var mamau = $(this).find("select[name='mamau']").val();
-			var masize = $(this).find("select[name='masize']").val();
-			objSizeSanPham["masize"] = masize;
-			objMauSanPham["mamau"] = mamau;
-			objChiTietSanPham["sizeSanPham"] = objSizeSanPham;
-			objChiTietSanPham["mauSanPham"] = objMauSanPham;
-			arrayChiTietSanPham.push(objChiTietSanPham);
-		});
-		dataSanPham["dsChiTietSanPham"] = arrayChiTietSanPham;
-		var strSanPham = JSON.stringify(dataSanPham);
-		$.ajax({
-			url : "/api/themsanpham",
-			type : "POST",
-			data : {
-				sanpham : strSanPham
-			},
-			success : function(value){
-				if(value == "true"){
-					window.location.href = "/";
-				}
+		$("#formsanpham").validate({
+			rules : {
+				tensanpham : "required",
+				mota : "required"
+			},messages : {
+				tensanpham : "Bạn chưa nhập tên sản phẩm, vui lòng thử lại"
+				,mota : "Bạn chưa nhập mô tả sản phẩm, vui lòng thử lại"
 			}
 		});
+		if($("#formsanpham").valid()){
+			var form = $('form')[0];
+			var formData = new FormData(form);
+			$.ajax({
+				url : "/api/uploadhinhsanpham",
+				type : "POST",
+				data : formData,
+				contentType : false,
+				processData : false,
+				enctype: "multipart/form-data",
+				success : function(value){
+					
+				}
+			});
+			var formSanPham = $("#formsanpham").serializeArray();
+			var dataSanPham = {};
+			var madanhmuc = $("select[id='danhmuc']").val();
+			var hinhsanpham = $("input[type='file']").val().split('\\').pop();
+			alert(hinhsanpham);
+			var danhMucSanPham = {
+					madanhmuc : madanhmuc
+			};
+			$.each(formSanPham,function(key,data){
+				if(data.name == 'tensanpham' || data.name == 'mota'){
+					dataSanPham[data.name] = data.value;
+				}
+			});
+			dataSanPham["danhmucsanpham"] = danhMucSanPham;
+			dataSanPham["hinhsanpham"] = hinhsanpham;
+			var arrayChiTietSanPham = [];
+			$("#container-chitietsanpham > .themchitietsanpham").each(function(key,data){
+				var objSizeSanPham = {};
+				var objMauSanPham = {};
+				var objChiTietSanPham = {}
+				var mamau = $(this).find("select[name='mamau']").val();
+				var masize = $(this).find("select[name='masize']").val();
+				objSizeSanPham["masize"] = masize;
+				objMauSanPham["mamau"] = mamau;
+				objChiTietSanPham["sizeSanPham"] = objSizeSanPham;
+				objChiTietSanPham["mauSanPham"] = objMauSanPham;
+				arrayChiTietSanPham.push(objChiTietSanPham);
+			});
+			dataSanPham["dsChiTietSanPham"] = arrayChiTietSanPham;
+			var strSanPham = JSON.stringify(dataSanPham);
+			$.ajax({
+				url : "/api/themsanpham",
+				type : "POST",
+				data : {
+					sanpham : strSanPham
+				},
+				success : function(value){
+					if(value == "true"){
+						window.location.href = "/";
+					}
+				}
+			});
+		}
 	});
 	$(".btn-xoasanpham").click(function(){
 		var masp = $(this).attr("data-masp");
@@ -77,6 +105,10 @@ $( document ).ready(function(){
 		});
 	});
 	$(".btn-suasanpham").click(function(){
+		$("#formsanpham").find("#tensanpham-error").remove();
+		$("#formsanpham").find("#mota-error").remove();
+		$("#formsanpham").find("input[name='tensanpham']").removeClass('error');
+		$("#formsanpham").find("textarea[name='mota']").removeClass('error');
 		var masp = $(this).attr("data-masp");
 		var dataSanPham;
 		$.ajax({
@@ -86,13 +118,75 @@ $( document ).ready(function(){
 				masp : masp
 			},
 			success : function(value){
-				console.log(value.mota);
+				$("#container-chitietsanpham").empty();
 				$("#formsanpham").find("input[name='tensanpham']").val(value.tensanpham);
+				$("#formsanpham").find("input[name='tensanpham']").attr("data-masp",value.masanpham);
 				$("#formsanpham").find("textarea[name='mota']").val(value.mota);
 				$("#formsanpham").find("#danhmuc").val(value.danhmucsanpham.madanhmuc);
+				var countChiTiet = value.dsChiTietSanPham.length;
+				for(var i = 0; i < countChiTiet; i++){
+					var cloneChiTietSp = $("#chitietsanpham").clone().removeAttr("id");
+					cloneChiTietSp.find("button").remove();
+					cloneChiTietSp.find("#mamau").val(value.dsChiTietSanPham[i].mauSanPham.mamau);
+					cloneChiTietSp.find("#masize").val(value.dsChiTietSanPham[i].sizeSanPham.masize);
+					$("#container-chitietsanpham").append(cloneChiTietSp);
+				}
+				$(".modal-footer").find("button").remove();
+				$(".modal-footer").append('<button type="button" class="btn btn btn-info btn-capnhatsanpham">Cập nhật</button>');
+				$(".modal-footer").append('<button type="button" class="btn btn-default btn-huyform" data-dismiss="modal">Đóng</button>');
 			}
 		});
-		$(this).attr("data-toggle","modal");
-		$(this).attr("data-target","#myModal");
 	});
+	$("body").on("click",".btn-huyform",function(){
+		$("#container-chitietsanpham").empty();
+		var cloneChiTietSp = $("#chitietsanpham").clone().removeAttr("id");
+		$("#container-chitietsanpham").append(cloneChiTietSp);
+	});
+	$("body").on("click",".btn-capnhatsanpham",function(){
+		var dataForm = $("#formsanpham").serializeArray();
+		var masanpham = $("#formsanpham").find("input[name='tensanpham']").attr('data-masp');
+		var dataSanPham = {};
+		var danhmuc = {};
+		dataSanPham['masanpham'] = masanpham;
+		var dsChiTietSanPham = [];
+		$.each(dataForm,function(key,data){
+			if(data.name == 'tensanpham' || data.name == 'mota'){
+				dataSanPham[data.name] = data.value;
+			}
+			if(data.name == 'madanhmuc'){
+				danhmuc[data.name] = data.value;
+				dataSanPham['danhmucsanpham'] = danhmuc;
+			}
+		});
+		$("#container-chitietsanpham > .themchitietsanpham").each(function(key,data){
+			var sizeSanPham = {};
+			var mauSanPham = {};
+			var chiTietSanPham = {};
+			var mamau = $(data).find('#mamau').val();
+			var masize = $(data).find('#masize').val();
+			sizeSanPham['masize'] = masize;
+			mauSanPham['mamau'] = mamau;
+			chiTietSanPham['sizeSanPham'] = sizeSanPham;
+			chiTietSanPham['mauSanPham'] = mauSanPham;
+			dsChiTietSanPham.push(chiTietSanPham);
+		});
+		dataSanPham['dsChiTietSanPham'] = dsChiTietSanPham;
+		var strDataSp = JSON.stringify(dataSanPham);
+		var strSanPham = JSON.stringify(dataSanPham);
+		$.ajax({
+			url : "/api/capnhatthongtinsanpham",
+			type : "POST",
+			data : {
+				sanpham : strSanPham
+			},
+			success : function(value){
+				if(value == "true"){
+					window.location.href = "/";
+				}
+			}
+		});
+		
+	});
+
+
 });

@@ -36,16 +36,43 @@ public class SanPhamDAO implements SanPhamImp{
 		return sanPham;
 	}
 	@Override
+	/**
+	 * Add new product
+	 * @param : SanPham
+	 * @return : int
+	 */
 	public int themSanPham(SanPham sanPham) {
 		// TODO Auto-generated method stub
+		System.out.println("Hinh san pham : "+sanPham.getHinhsanpham());
 		int maSanPham = sanPhamMapper.themSanPham(sanPham);
 		return maSanPham;
 	}
 	@Override
+	/**
+	 * Delete product by id
+	 * @param : int
+	 * @return : boolean
+	 */
 	public boolean xoaSanPhamTheoMa(int maSanPham) {
 		// TODO Auto-generated method stub
 		try {
 			sanPhamMapper.xoaSanPhamTheoMa(maSanPham);
+			return true;
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return false;
+	}
+	@Override
+	/**
+	 * Update info product
+	 * @param : SanPham
+	 * @return : boolean
+	 */
+	public boolean capNhatThongTinSanPham(SanPham sanPham) {
+		// TODO Auto-generated method stub
+		try {
+			sanPhamMapper.capNhatThongTinSanPham(sanPham);
 			return true;
 		}catch(Exception ex) {
 			ex.printStackTrace();

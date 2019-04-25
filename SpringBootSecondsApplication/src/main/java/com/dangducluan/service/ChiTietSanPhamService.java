@@ -22,5 +22,10 @@ public class ChiTietSanPhamService implements ChiTietSanPhamImp{
 		// TODO Auto-generated method stub
 		return chiTietSanPhamDAO.xoaThongTinChiTietSanPham(maSanPham);
 	}
+	@Override
+	public boolean capNhatThongTinChiTietSanPham(ChiTietSanPham chiTietSanPham) {
+		// TODO Auto-generated method stub
+		return chiTietSanPhamDAO.capNhatThongTinChiTietSanPham(chiTietSanPham);
+	}
 
 }

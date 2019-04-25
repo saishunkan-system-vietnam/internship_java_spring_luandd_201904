@@ -13,3 +13,6 @@ a:hover {
 #chitietsanpham{
 	display: none;
 }
+.error {
+	color: red;
+}

@@ -7,4 +7,5 @@ public interface SanPhamImp {
 	public abstract SanPham layThongTinSanPhamTheoMa(int maSanPham);
 	public abstract int themSanPham(SanPham sanPham);
 	public abstract boolean xoaSanPhamTheoMa(int maSanPham);
+	public abstract boolean capNhatThongTinSanPham(SanPham sanPham);
 }

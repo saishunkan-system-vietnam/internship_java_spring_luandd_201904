@@ -14,6 +14,11 @@ public class MauSanPhamDAO implements MauSanPhamImp{
 	@Autowired
 	MauSanPhamMapper mauSanPhamMapper;
 	@Override
+	/**
+	 * Get list color product
+	 * @param : null
+	 * @return : List
+	 */
 	public List<MauSanPham> layDanhSachMauSanPham() {
 		// TODO Auto-generated method stub
 		List<MauSanPham> dsMau = mauSanPhamMapper.layDanhSachMauSanPham();

@@ -28,6 +28,7 @@
 	</resultMap>
 
 	<resultMap type="ChiTietSanPham" id="ChiTietSanPhamResult">
+		<id property="maChiTietSanPham" column="machitietsanpham"/>
 		<association property="sizeSanPham"
 			resultMap="SizeSanPhamResult"></association>
 		<association property="mauSanPham"
@@ -50,6 +51,7 @@
 		,sp.mota
 		,sp.hinhsanpham
 		,sp.madanhmuc
+		,ctsp.machitietsanpham
 		,ctsp.masize
 		,ctsp.mamau
 		,dmsp.tendanhmuc
@@ -66,9 +68,12 @@
 		= #{masanpham}
 	</select>
 	<insert id="themSanPham" parameterType="SanPham" useGeneratedKeys="true" keyColumn="masanpham" keyProperty="masanpham">
-		insert into sanpham(tensanpham,mota,madanhmuc) values(#{tensanpham},#{mota},#{danhmucsanpham.madanhmuc})
+		insert into sanpham(tensanpham,mota,hinhsanpham,madanhmuc) values(#{tensanpham},#{mota},#{hinhsanpham},#{danhmucsanpham.madanhmuc})
 	</insert>
 	<delete id="xoaSanPhamTheoMa" parameterType="int">
 		delete from sanpham where masanpham = #{maSanPham}
 	</delete>
+	<update id="capNhatThongTinSanPham" parameterType="SanPham">
+		update sanpham set tensanpham = #{tensanpham}, mota = #{mota}, madanhmuc = #{danhmucsanpham.madanhmuc} where masanpham = #{masanpham}
+	</update>
 </mapper>
