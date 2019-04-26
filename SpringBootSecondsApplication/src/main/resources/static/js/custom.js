@@ -1,4 +1,5 @@
 $( document ).ready(function(){
+	var luuTenHinhGoc = "";
 	$("body").on("click",".btn-themchitiet",function(){
 		var btnXoa = $(this).closest("div").find("button").hasClass("btn-xoachitiet");
 		if(btnXoa == true){
@@ -48,7 +49,6 @@ $( document ).ready(function(){
 			var dataSanPham = {};
 			var madanhmuc = $("select[id='danhmuc']").val();
 			var hinhsanpham = $("input[type='file']").val().split('\\').pop();
-			alert(hinhsanpham);
 			var danhMucSanPham = {
 					madanhmuc : madanhmuc
 			};
@@ -105,12 +105,9 @@ $( document ).ready(function(){
 		});
 	});
 	$(".btn-suasanpham").click(function(){
-		$("#formsanpham").find("#tensanpham-error").remove();
-		$("#formsanpham").find("#mota-error").remove();
-		$("#formsanpham").find("input[name='tensanpham']").removeClass('error');
-		$("#formsanpham").find("textarea[name='mota']").removeClass('error');
 		var masp = $(this).attr("data-masp");
 		var dataSanPham;
+		luuTenHinhGoc = $(this).closest("tr").find("img").attr("data-hinhsp");
 		$.ajax({
 			url : "/api/laythongtinsanphamtheoid",
 			type : "GET",
@@ -143,10 +140,29 @@ $( document ).ready(function(){
 		$("#container-chitietsanpham").append(cloneChiTietSp);
 	});
 	$("body").on("click",".btn-capnhatsanpham",function(){
+		var form = $('form')[0];
+		var formData = new FormData(form);
+		$.ajax({
+			url : "/api/uploadhinhsanpham",
+			type : "POST",
+			data : formData,
+			contentType : false,
+			processData : false,
+			enctype: "multipart/form-data",
+			success : function(value){
+				
+			}
+		});
 		var dataForm = $("#formsanpham").serializeArray();
 		var masanpham = $("#formsanpham").find("input[name='tensanpham']").attr('data-masp');
+		var hinhsanpham = $("input[type='file']").val().split('\\').pop();
 		var dataSanPham = {};
 		var danhmuc = {};
+		if(hinhsanpham == ''){
+			dataSanPham['hinhsanpham'] = luuTenHinhGoc;
+		}else{
+			dataSanPham['hinhsanpham'] = hinhsanpham;
+		}
 		dataSanPham['masanpham'] = masanpham;
 		var dsChiTietSanPham = [];
 		$.each(dataForm,function(key,data){
@@ -186,6 +202,14 @@ $( document ).ready(function(){
 			}
 		});
 		
+	});
+	$("#btn-themsp").click(function(){
+		$("#formsanpham").find("#tensanpham-error").remove();
+		$("#formsanpham").find("#mota-error").remove();
+		$("#formsanpham").find("input[name='tensanpham']").removeClass('error');
+		$("#formsanpham").find("textarea[name='mota']").removeClass('error');
+		$("#formsanpham").find("input[name='tensanpham']").val("");
+		$("#formsanpham").find("textarea[name='mota']").val("");
 	});
 
 

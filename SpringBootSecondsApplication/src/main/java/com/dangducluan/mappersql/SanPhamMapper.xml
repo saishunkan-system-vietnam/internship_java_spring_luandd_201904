@@ -74,6 +74,6 @@
 		delete from sanpham where masanpham = #{maSanPham}
 	</delete>
 	<update id="capNhatThongTinSanPham" parameterType="SanPham">
-		update sanpham set tensanpham = #{tensanpham}, mota = #{mota}, madanhmuc = #{danhmucsanpham.madanhmuc} where masanpham = #{masanpham}
+		update sanpham set tensanpham = #{tensanpham}, mota = #{mota}, hinhsanpham = #{hinhsanpham},madanhmuc = #{danhmucsanpham.madanhmuc} where masanpham = #{masanpham}
 	</update>
 </mapper>

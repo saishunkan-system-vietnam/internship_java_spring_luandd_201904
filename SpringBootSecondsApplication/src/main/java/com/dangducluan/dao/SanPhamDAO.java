@@ -43,7 +43,6 @@ public class SanPhamDAO implements SanPhamImp{
 	 */
 	public int themSanPham(SanPham sanPham) {
 		// TODO Auto-generated method stub
-		System.out.println("Hinh san pham : "+sanPham.getHinhsanpham());
 		int maSanPham = sanPhamMapper.themSanPham(sanPham);
 		return maSanPham;
 	}

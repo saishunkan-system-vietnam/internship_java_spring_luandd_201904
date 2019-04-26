@@ -9,7 +9,7 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<button type="button" class="btn btn-primary" data-toggle="modal"
+			<button type="button" id="btn-themsp"  class="btn btn-primary" data-toggle="modal"
 				data-target="#myModal">Thêm</button>
 			<table class="table table-bordered">
 				<thead>
@@ -26,7 +26,7 @@
 						<td th:utext="${sp.tensanpham}"></td>
 						<td><img alt=""
 							th:src="@{|/image/sanpham/${sp.hinhsanpham}|}" width="250"
-							height="250"></td>
+							height="250" th:data-hinhsp="${sp.hinhsanpham}"></td>
 						<td>
 							<button type="button" class="btn btn-warning btn-suasanpham" th:data-masp="${sp.masanpham}" data-toggle="modal"
 				data-target="#myModal">Sửa</button>
@@ -60,7 +60,10 @@
 										<textarea class="form-control" rows="5" name="mota"></textarea>
 									</div>
 									<div class="form-group">
-										<label for="hinhsanpham">Hình sản phẩm :</label> <input type="file" id="hinhsanpham" name="hinhsanpham"
+										<label for="hinhsanpham">Hình sản phẩm :</label>
+										 <input type="file" id="hinhsanpham" name="hinhsanpham"
+											class="form-control">
+											<input type="file" id="hinhsanpham" name="hinhsanpham"
 											class="form-control">
 									</div>
 									<div class="form-group">

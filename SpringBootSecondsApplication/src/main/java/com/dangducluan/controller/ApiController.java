@@ -134,20 +134,28 @@ public class ApiController {
 	}
 	@PostMapping(path = "/uploadhinhsanpham")
 	@ResponseBody
-	public String uploadHinhSanPham(MultipartHttpServletRequest multipartHttpServletRequest) {
-		Iterator<String> tenFiles = multipartHttpServletRequest.getFileNames();
-		MultipartFile multipartFile = multipartHttpServletRequest.getFile(tenFiles.next());
-		File file = new File("C:\\Users\\User\\Documents\\workspace-spring-tool-suite-4-4.2.0.RELEASE\\SpringBootSecondsApplication\\src\\main\\resources\\static\\image\\sanpham",multipartFile.getOriginalFilename());
-		try {
-			multipartFile.transferTo(file);
-			return "true";
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public String uploadHinhSanPham(@RequestParam MultipartFile[] hinhsanpham) {
+		
+		for(int i = 0; i < hinhsanpham.length; i++) {
+			MultipartFile multipartFile = hinhsanpham[i];
+			String pathSave = System.getProperty("user.dir")+"\\src\\main\\resources\\static\\image\\sanpham";
+			String nameFile = multipartFile.getOriginalFilename();
+			if(nameFile.equals("")) {
+				continue;
+			}
+			File file = new File(pathSave,nameFile);
+			try {
+				multipartFile.transferTo(file);
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return "false";
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return "false";
+			}
 		}
-		return "false";
+		return "true";
 	}
 }
