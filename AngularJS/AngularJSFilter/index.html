@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJS</title>
+	<script type="text/javascript" src="../angular.min.js"></script>
+	<script type="text/javascript" src="custom.js"></script>
+	<!-- 
+		+ ng-non-bindable : not using expression
+	-->
+</head>
+<body>
+	<h1>AngularJS Filter</h1>
+	<div ng-app="myApp" ng-controller="myController">
+		Amount : <input type="text" ng-model="name">
+		<br>
+		<b ng-non-bindable>{{amount | currency}}</b>
+		<p>{{ amount | currency}}</p>
+		<hr>
+		Date : <span>{{date | date:'dd-MM-yyyy'}}</span>
+		<hr>
+		JSON parse : <p>{{isMe | json : 2}}</p>
+		<hr>
+		<p>Limit Array {{intArray}}</p>
+		<p><input type="number" ng-model="arrLimit"></p>
+		<p>New Arra : {{intArray | limitTo : arrLimit}}</p>
+		<hr>
+		<p>Limit String {{strData}}</p>
+		<p><input type="number" ng-model="arrLimit"></p>
+		<p>New Array : {{strData | limitTo : arrLimit}}</p>
+		<p>Limit Number {{number}}</p>
+		<p><input type="number" ng-model="arrLimit"></p>
+		<p>New Number : {{number | limitTo : arrLimit}}</p>
+	</div>
+</body>
+</html>

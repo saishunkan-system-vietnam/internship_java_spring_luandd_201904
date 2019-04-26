@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hello AngularJS</title>
+	<script type="text/javascript" src="../angular.min.js"></script>
+	<script type="text/javascript" src="custom.js"></script>
+<!-- 
+	- ng-model : khai bao bien
+	- ng-controller : khai bao controlle xu ly su kien
+	- ng-app : khai bao module angularJS
+	- ng-click : xu ly su kien
+	- {{bien}} : truy lay lay gia tri cua bien
+-->
+</head>
+<body>
+	<h1>Hello AngularJS</h1>
+	<div ng-app="myApp" ng-controller="myController">
+		<h3>Caculator</h3>
+		<p>Value 1 : <input ng-model="var1"></p>
+		<p>Value 2 : <input ng-model="var2"></p>
+		<p>-------------------</p>
+		<button ng-click="calcSum()">+</button>
+		<button ng-click="caclSub()">-</button>
+		<p style="color: red">{{var1}} {{operator}} {{var2}}</p>
+		<button ng-click="calculate()">=</button>
+		<p>Result : <span style="color: red;">{{result}}</span></p>
+	</div>
+</body>
+</html>

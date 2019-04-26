@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJS Event</title>
+	<script type="text/javascript" src="../angular.min.js"></script>
+	<script type="text/javascript" src="custom.js"></script>
+	<style type="text/css">
+		.div-event{
+			width: 290px;
+			height: 100px;
+			background: blue;
+		}
+	</style>
+</head>
+<body>
+	<div ng-app="myApp" ng-controller="myCtr">
+		<h3>Mouse Event {Over, Enter, Move, Leave}</h3>
+		<div class="div-event" ng-mouseover="mouseoverHandler($event)"
+		ng-mouseenter="mouseenterHandler($event)"
+		ng-mousemove="mousemoveHandler($event)"
+		ng-mouseleave="mouseleaveHandler($event)">
+		</div>
+		<ol>
+			<li>Mouse Over : {{overCount}}</li>
+			<li>Mouse Enter : {{enterCount}}</li>
+			<li>Mouse Move : {{moveCount}}</li>
+			<li>Mouse Leave : {{leaveCount}}</li>
+		</ol>
+		<hr>
+		<hr>
+		<h3>Mouse Event {Up, Down, Click}</h3>
+		<div class="div-event" ng-mouseup="mouseupHandler($event)"
+		ng-mousedown="mousedownHandler($event)"
+		ng-click="mouseclickHandler($event)">
+		</div>
+		<ol>
+			<li>Mouse Up : {{upCount}}</li>
+			<li>Mouse Down : {{downCount}}</li>
+			<li>Mouse Click : {{clickCount}}</li>
+		</ol>
+	</div>
+</body>
+</html>
