@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJS Form</title>
+	<script type="text/javascript" src="../angular.min.js"></script>
+	<script type="text/javascript" src="custom.js"></script>
+</head>
+<body ng-app="myApp" ng-controller="myController">
+	<form>
+		Name : <input type="text" name="name" ng-model="yourName">
+		<input type="checkbox" ng-model="showName">
+	</form>
+	<h3 ng-show="showName">Your name : {{yourName}}</h3>
+</body>
+</html>
